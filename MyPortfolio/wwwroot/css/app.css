@@ -176,11 +176,25 @@ html, body {
     right: 16px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 22px;
+    font-size: 35px;
     background: transparent;
     border: none;
     cursor: pointer;
+    color: var(--accent);
 }
+
+/* Backdrop khi mở menu mobile */
+.nav-backdrop {
+    display: none;
+}
+
+    .nav-backdrop.show {
+        display: block;
+        position: fixed;
+        inset: var(--nav-h) 0 0 0;
+        background: rgba(0,0,0,.4);
+        z-index: 999; /* dưới .glass-nav (1000) */
+    }
 
 /* ===== Theme ===== */
 :root {
@@ -806,3 +820,138 @@ a.cta, a.cta:hover, a.cta:focus, a.cta:active {
     .projects__footer .light {
         color: #fff;
     }
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+/* 768–1099px: 2 cột project, about chuyển 2 cột hẹp */
+@media (min-width: 768px) and (max-width: 1099px) {
+
+    .about__grid {
+        grid-template-columns: 1.2fr 1fr;
+    }
+
+    .skills {
+        grid-template-columns: repeat(4, minmax(140px,1fr));
+    }
+
+    .about__timeline {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ≤767px: mobile layout */
+@media (max-width: 767px) {
+    /* NAV: show burger, hide links (bạn chỉ cần thêm class .open cho .links khi click burger) */
+    .burger {
+        display: block;
+    }
+
+    .links {
+        display: none;
+        position: fixed;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        background: #111;
+        padding: 12px 16px;
+        border-bottom: 1px solid rgba(255,255,255,.06);
+        flex-direction: column;
+        gap: 12px;
+    }
+
+        .links.open {
+            display: flex;
+            align-items: last baseline;
+        }
+
+    /* HERO */
+    .hero {
+        padding: 28px 30px 40px;
+    }
+
+    .hero__shape {
+        width: 30vw;
+    }
+   
+    .hero__inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .hero__eyebrow {
+        justify-content: flex-start;
+    }
+
+    .hero__title {
+        margin-top: 4px;
+    }
+
+    /* CTA button thấp hơn một chút cho mobile */
+    .cta {
+        --h: 46px;
+        --pad: 18px;
+    }
+
+        .cta .cta__icon {
+            width: calc(var(--h) - 8px);
+            height: calc(var(--h) - 8px);
+        }
+
+    /* ABOUT */
+    .about {
+        padding: 28px 16px 56px;
+    }
+
+    .about__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills {
+        grid-template-columns: repeat(3, minmax(120px,1fr));
+        gap: 24px;
+    }
+
+    .about__timeline {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    /* PROJECTS */
+    .projects {
+        padding-block: 56px;
+    }
+
+    .pgrid {
+        grid-template-columns: 1fr;
+    }
+
+    .skills {
+        grid-template-columns: repeat(2, minmax(140px,1fr));
+    }
+}
+
+/* ≤480px: siêu nhỏ – chữ & khoảng cách gọn hơn */
+@media (max-width: 480px) {
+    .hero__eyebrow {
+        font-size: clamp(18px,5vw,22px);
+    }
+
+    .hero__title {
+        font-size: clamp(24px,7vw,32px);
+    }
+
+    .badge {
+        width: 96px;
+        height: 96px;
+    }
+
+    .stat__num {
+        font-size: 38px;
+    }
+}
