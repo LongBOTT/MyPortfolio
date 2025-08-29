@@ -1,0 +1,78 @@
+﻿@page "/projects"
+
+<PageTitle>My Projects</PageTitle>
+
+<section class="projects">
+    <div class="container">
+        <!-- Heading -->
+        <div class="projects__heading">
+            <h2><span class="light">MY</span> <span class="accent">PROJECTS</span></h2>
+        </div>
+
+        <!-- Grid -->
+        <div class="pgrid">
+            @foreach (var p in projects)
+            {
+                <article class="pcard">
+                    <div class="pcard__body">
+                        <img src="@p.Image" alt="@p.Title" loading="lazy" />
+                        <div class="overlay">
+                            <h3>@p.Title</h3>
+                        </div>
+                    </div>
+                </article>
+                <section class="detail">
+                    <h3>@p.Title</h3>
+                    <div class="description">
+                        <span>@p.Description</span>
+
+                    </div>
+                    <dl class="detail__list">
+                        <dt>Created</dt>
+                        <dd>@p.Created</dd>
+                        <dt>Role</dt>
+                        <dd>@p.Role</dd>
+                        <dt>Frontend</dt>
+                        <dd>@p.Frontend</dd>
+                        <dt>Backend</dt>
+                        <dd>@p.Backend</dd>
+                        <dt>Source</dt>
+                        <dd><a href=@p.CodeUrl target="_blank" rel="noopener">@p.Title</a></dd>
+                        <dt>Demo</dt>
+                        <dd><a href=@p.DemoUrl target="_blank" rel="noopener">@p.Title</a></dd>
+                    </dl>
+                </section>
+            }
+        </div>
+
+        <div class="projects__footer">
+            <h2><span class="light">Thank you for reading to the end.</span></h2>
+        </div>
+
+    </div>
+</section>
+
+@code {
+
+    record Project(
+      string Title,
+      string Image,
+      string Description,
+      string Created,
+      string Role,
+      string Frontend,
+      string Backend,
+      string? DemoUrl = null,
+      string? CodeUrl = null
+    );
+
+    List<Project> projects = new()
+  {
+    new("My Portfolio", "images/projects/portfolio.png",
+    "This is a single-page portfolio built with Blazor WebAssembly (.NET 8). It's my personal website to introduce myself, my skills, and the projects I have worked on.",
+    "08/2025",
+    "Main developer",
+    "Blazor WebAssembly, CSS",
+    "None"),
+  };
+}
